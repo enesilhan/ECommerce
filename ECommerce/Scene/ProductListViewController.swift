@@ -103,6 +103,16 @@ class ProductListViewController: UIViewController {
 extension ProductListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            let offsetY = scrollView.contentOffset.y
+            let contentHeight = scrollView.contentSize.height
+            let height = scrollView.frame.height
+
+            if offsetY > contentHeight - height * 1.5 {
+                viewModel.fetchProducts()
+            }
+        }
 }
 
 extension ProductListViewController: UICollectionViewDelegateFlowLayout {
