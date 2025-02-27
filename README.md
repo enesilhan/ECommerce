@@ -1,4 +1,4 @@
- 3# 📌 ECommerce
+### ECommerce
 
 
 
@@ -15,12 +15,9 @@ Oddsy
 │── SceneDelegate.swift
 │── Resources/
 │── Models/
-│── ViewModels/
-│── Views/
+│── Scene/
 │── Networking/
-│── Services/
-│── Coordinators/
-│── Utils/
+│── Managerss/
 │── Extensions/
 │── Assets.xcassets
 │── Info.plist
