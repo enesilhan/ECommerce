@@ -9,6 +9,12 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
     
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var brandNameLabel: UILabel!
+    @IBOutlet private weak var productNameLabel: UILabel!
+    @IBOutlet private weak var productPriceLabel: UILabel!
+    @IBOutlet private weak var descriptionTextView: UITextView!
+    
     private let viewModel = ProductDetailViewModel()
     var productId: Int?
     
@@ -37,5 +43,24 @@ class ProductDetailViewController: UIViewController {
     }
     
     private func updateUI(with product: ProductDetailModel) {
+        if let imageUrl = product.result.images.first?.images.first?.imageURL, let url = URL(string: imageUrl) {
+            self.imageView.kf.setImage(
+                with: url,options: [
+                    .transition(.fade(0.3))
+                ]
+            )
+        }
+
+        let description = product.result.description
+            let fullDescription = """
+            Özellikler: \(description.özellikler)<br/>
+            Yıl Sezon: \(description.yılSezon)<br/>
+            Kumaş ve Bakım: \(description.kumaşVeBakım)
+            """
+        descriptionTextView.attributedText = fullDescription.toHTMLAttributedString()
+    
+        self.brandNameLabel.text = product.result.brandName
+        self.productNameLabel.text = product.result.displayName
+        self.productPriceLabel.text = product.result.actualPriceText
     }
 }
