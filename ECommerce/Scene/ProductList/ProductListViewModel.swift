@@ -5,13 +5,11 @@
 //  Created by Enes İlhan on 27.02.2025.
 //
 
-import Foundation
-
 class ProductListViewModel {
     
     private let productService: ProductListServiceProtocol
-    
     private var products: [ProductList] = []
+    private var shareLink: String?
     
     private var currentPage = 1
     private var totalPageCount = 1
@@ -38,6 +36,7 @@ class ProductListViewModel {
                     self.products.append(contentsOf: newProducts)
                     self.currentPage += 1
                     self.totalPageCount = response.result?.totalPageCount ?? self.totalPageCount
+                    self.shareLink = response.result?.shareLink
                     self.onDataUpdated?(self.products)
                 }
             case .failure(let error):
@@ -48,5 +47,9 @@ class ProductListViewModel {
     
     func getProducts() -> [ProductList] {
         return products
+    }
+
+    func getShareLink() -> String? {
+        return shareLink
     }
 }
