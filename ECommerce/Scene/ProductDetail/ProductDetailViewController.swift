@@ -14,14 +14,17 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet private weak var productNameLabel: UILabel!
     @IBOutlet private weak var productPriceLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
-    
+    @IBOutlet private weak var favoriteButton: UIButton!
+
     private let viewModel = ProductDetailViewModel()
     var productId: Int?
+    var onFavoriteUpdated: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         fetchProductDetails()
+        updateFavoriteButton()
     }
     
     private func setupUI() {
@@ -62,5 +65,20 @@ class ProductDetailViewController: UIViewController {
         self.brandNameLabel.text = product.result.brandName
         self.productNameLabel.text = product.result.displayName
         self.productPriceLabel.text = product.result.actualPriceText
+    }
+
+    @IBAction func favoriteAction(_ sender: UIButton) {
+        guard let productId = productId else { return }
+        FavoritesManager.shared.toggleFavorite(productId: productId)
+        updateFavoriteButton()
+
+        onFavoriteUpdated?()
+    }
+
+    private func updateFavoriteButton() {
+        guard let productId = productId else { return }
+        let isFav = FavoritesManager.shared.isFavorite(productId: productId)
+        let imageName = isFav ? "heart.fill" : "heart"
+        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
 }
