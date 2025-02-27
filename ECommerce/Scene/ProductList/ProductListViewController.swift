@@ -103,15 +103,24 @@ class ProductListViewController: UIViewController {
 
 extension ProductListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-          let snapshot = dataSource.snapshot()
-          let selectedProduct = snapshot.itemIdentifiers[indexPath.item]
-          
+        let snapshot = dataSource.snapshot()
+        let selectedProduct = snapshot.itemIdentifiers[indexPath.item]
+        
         guard let productId = selectedProduct.productID else { return }
-          
-          let detailVC = ProductDetailViewController(nibName: "ProductDetailViewController", bundle: nil)
-          detailVC.productId = productId
-          navigationController?.pushViewController(detailVC, animated: true)
-      }
+        
+        let detailVC = ProductDetailViewController(nibName: "ProductDetailViewController", bundle: nil)
+        detailVC.productId = productId
+        
+        detailVC.onFavoriteUpdated = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if let cell = collectionView.cellForItem(at: indexPath) as? ListProductCell {
+                    cell.updateFavoriteButton()
+                }
+            }
+        }
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
             let offsetY = scrollView.contentOffset.y

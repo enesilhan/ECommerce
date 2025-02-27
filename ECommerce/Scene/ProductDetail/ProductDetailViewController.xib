@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="brandNameLabel" destination="lP4-aR-6un" id="AHM-KX-Xns"/>
                 <outlet property="descriptionTextView" destination="NOG-E5-0gm" id="trb-jh-VEN"/>
+                <outlet property="favoriteButton" destination="Pba-ki-fNQ" id="lP5-e9-rhd"/>
                 <outlet property="imageView" destination="MYd-LC-nCQ" id="BDc-kP-YP5"/>
                 <outlet property="productNameLabel" destination="MNY-J1-Edp" id="Q23-9E-GxO"/>
                 <outlet property="productPriceLabel" destination="7QH-cN-Bc0" id="i6F-mU-XTg"/>
@@ -33,6 +34,14 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDe-s6-yEr">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
                                     <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pba-ki-fNQ">
+                                            <rect key="frame" x="356.33333333333331" y="16" width="20.666666666666686" height="22"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" image="heart" catalog="system"/>
+                                            <connections>
+                                                <action selector="favoriteAction:" destination="-1" eventType="touchUpInside" id="ZTw-y1-yCf"/>
+                                            </connections>
+                                        </button>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MYd-LC-nCQ">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="390"/>
                                             <constraints>
@@ -75,6 +84,8 @@
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Pba-ki-fNQ" secondAttribute="trailing" constant="16" id="6jf-Eg-r43"/>
+                                        <constraint firstItem="Pba-ki-fNQ" firstAttribute="top" secondItem="yDe-s6-yEr" secondAttribute="top" constant="16" id="Ca0-Nn-IRZ"/>
                                         <constraint firstAttribute="trailing" secondItem="MYd-LC-nCQ" secondAttribute="trailing" id="Tkz-zt-nli"/>
                                         <constraint firstItem="PTQ-Am-G4L" firstAttribute="top" secondItem="MYd-LC-nCQ" secondAttribute="bottom" constant="20" id="Ymb-16-rwT"/>
                                         <constraint firstItem="MYd-LC-nCQ" firstAttribute="top" secondItem="yDe-s6-yEr" secondAttribute="top" id="krF-rf-1kI"/>
@@ -116,6 +127,7 @@
         </view>
     </objects>
     <resources>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
