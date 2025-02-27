@@ -5,7 +5,7 @@
 //  Created by Enes İlhan on 27.02.2025.
 //
 
-struct ProductListModel: Codable {
+struct ProductListModel: Codable, Hashable {
     var result: ResultModel?
 
     enum CodingKeys: String, CodingKey {
@@ -13,7 +13,7 @@ struct ProductListModel: Codable {
     }
 }
 
-struct ResultModel: Codable {
+struct ResultModel: Codable, Hashable {
     var productList: [ProductList]?
     var totalPageCount: Int?
     var shareLink: String?
@@ -25,7 +25,7 @@ struct ResultModel: Codable {
     }
 }
 
-struct ProductList: Codable {
+struct ProductList: Codable, Hashable {
     var productID: Int?
     var displayName: String?
     var brandName: String?
